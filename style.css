@@ -27,7 +27,7 @@ body {
 }
 
 .cell.revealed {
-  background-color: #eee;
+  background-color: #e5e5e5;
   cursor: default;
 }
 
