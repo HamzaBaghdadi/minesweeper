@@ -6,7 +6,8 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: #f0f0f0;
+  background-color: #222;
+  color: white;
 }
 
 #game {
@@ -18,7 +19,7 @@ body {
 .cell {
   width: 30px;
   height: 30px;
-  background-color: #ccc;
+  background-color: #373737;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,20 +28,31 @@ body {
 }
 
 .cell.revealed {
-  background-color: #eee;
+  background-color: #504f4f;
   cursor: default;
 }
 
 .cell.mine {
   background-color: red;
+  background-image: url("https://pngimg.com/d/mines_PNG11.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 }
 
 .cell.flag {
-  background-color: yellow;
+  background-image: url("https://cdn-icons-png.flaticon.com/512/5515/5515469.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 }
 
 .cell.win {
   background-color: green;
+  background-image: url("https://pngimg.com/d/mines_PNG11.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 }
 
 #restartButton {
