@@ -3,9 +3,9 @@
 const game = document.getElementById("game");
 const message = document.createElement("div");
 const restartButton = document.createElement("button");
-const rows = 10;
-const cols = 10;
-const minesCount = 10;
+const rows = 16;
+const cols = 16;
+const minesCount = 40;
 let board = [];
 let minePositions = [];
 let revealedCount = 0; // Track the number of revealed cells
