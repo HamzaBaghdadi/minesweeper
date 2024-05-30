@@ -1,25 +1,29 @@
 // script.js
 
 const game = document.getElementById("game");
-const message = document.createElement("div");
-const restartButton = document.createElement("button");
-const rows = 10;
-const cols = 10;
-const minesCount = 10;
+const message = document.getElementById("gameMessage");
+const restartButton = document.getElementById("restartButton");
+const controls = document.getElementById("controls");
+const easyButton = document.getElementById("easy");
+const mediumButton = document.getElementById("medium");
+const hardButton = document.getElementById("hard");
+let rows = 9;
+let cols = 9;
+let minesCount = 9;
 let board = [];
 let minePositions = [];
 let revealedCount = 0; // Track the number of revealed cells
 let gameOver = false; // Track if the game is over
+let firstClick = true; // Track if it's the first click
 
 // Initialize the game
 function init() {
   createBoard();
-  placeMines();
-  updateNumbers();
   renderBoard();
   gameOver = false; // Reset game over state
   revealedCount = 0; // Reset revealed count
   message.textContent = ""; // Clear message
+  firstClick = true; // Reset first click state
 }
 
 // Create the game board
@@ -35,7 +39,7 @@ function createBoard() {
 }
 
 // Place mines randomly on the board
-function placeMines() {
+function placeMines(excludeRow, excludeCol) {
   let placedMines = 0;
   minePositions = [];
 
@@ -43,7 +47,7 @@ function placeMines() {
     const row = Math.floor(Math.random() * rows);
     const col = Math.floor(Math.random() * cols);
 
-    if (!board[row][col].mine) {
+    if (!board[row][col].mine && (row !== excludeRow || col !== excludeCol)) {
       board[row][col].mine = true;
       minePositions.push({ row, col });
       placedMines++;
@@ -102,6 +106,12 @@ function renderBoard() {
 function handleCellClick(event) {
   const row = parseInt(event.target.dataset.row);
   const col = parseInt(event.target.dataset.col);
+
+  if (firstClick) {
+    placeMines(row, col);
+    updateNumbers();
+    firstClick = false;
+  }
 
   if (!gameOver) {
     revealCell(row, col);
@@ -222,22 +232,47 @@ function restartGame() {
   renderBoard();
 }
 
+// Set game difficulty
+function setDifficulty(event) {
+  switch (event.target.value) {
+    case "easy":
+      rows = 9;
+      cols = 9;
+      minesCount = 9;
+      break;
+    case "medium":
+      rows = 16;
+      cols = 16;
+      minesCount = 40;
+      break;
+    case "hard":
+      rows = 16;
+      cols = 30;
+      minesCount = 99;
+      break;
+  }
+  restartGame();
+}
+
 // Create restart button
 function createRestartButton() {
   restartButton.id = "restartButton";
   restartButton.innerHTML =
     '<img src="https://www.freeiconspng.com/thumbs/restart-icon/black-panel-restart-system-icon--6.png" alt="Restart">';
   restartButton.addEventListener("click", restartGame);
-  document.body.appendChild(restartButton);
 }
 
 // Create message display
 function createMessageDisplay() {
   message.id = "gameMessage";
-  document.body.appendChild(message);
 }
 
 // Start the game
 init();
 createRestartButton();
 createMessageDisplay();
+
+// Add event listeners for difficulty buttons
+easyButton.addEventListener("change", setDifficulty);
+mediumButton.addEventListener("change", setDifficulty);
+hardButton.addEventListener("change", setDifficulty);

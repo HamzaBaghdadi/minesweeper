@@ -8,6 +8,21 @@
   </head>
   <body>
     <div id="game"></div>
+    <div id="controls">
+      <input type="radio" id="easy" name="difficulty" value="easy" checked />
+      <label for="easy">9x9, 9 mines</label><br />
+      <input type="radio" id="medium" name="difficulty" value="medium" />
+      <label for="medium">16x16, 40 mines</label><br />
+      <input type="radio" id="hard" name="difficulty" value="hard" />
+      <label for="hard">16x30, 99 mines</label><br />
+    </div>
+    <div id="gameMessage"></div>
+    <button id="restartButton">
+      <img
+        src="https://www.freeiconspng.com/thumbs/restart-icon/black-panel-restart-system-icon--6.png"
+        alt="Restart"
+      />
+    </button>
     <script src="main.js"></script>
   </body>
 </html>
