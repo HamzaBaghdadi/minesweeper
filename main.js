@@ -1,5 +1,3 @@
-// script.js
-
 const game = document.getElementById("game");
 const message = document.getElementById("gameMessage");
 const restartButton = document.getElementById("restartButton");
@@ -84,6 +82,10 @@ function renderBoard() {
         cellElement.addEventListener("click", handleCellClick);
         cellElement.addEventListener("contextmenu", handleRightClick);
         cellElement.addEventListener("dblclick", handleCellDoubleClick);
+        cellElement.addEventListener(
+          "click" && "contextmenu",
+          handleCellDoubleClick
+        );
       }
 
       if (cell.revealed) {
@@ -257,8 +259,7 @@ function setDifficulty(event) {
 // Create restart button
 function createRestartButton() {
   restartButton.id = "restartButton";
-  restartButton.innerHTML =
-    '<img src="https://www.freeiconspng.com/thumbs/restart-icon/black-panel-restart-system-icon--6.png" alt="Restart">';
+  restartButton.innerHTML = '<img src="assets/refresh.png" alt="Restart">';
   restartButton.addEventListener("click", restartGame);
 }
 
